@@ -1,11 +1,11 @@
 Simple AI agent capable to assist and adapt to each individual employee as well as answer and update relevant information related to selected HR domains specific to a business.
 
-**Functionality**
+**Main Functionality**
 - this PoC lets users interact with an HR agent server with the agent deciding to either learn new personalized HR relevant information for the user to support its development, HR related interests and concerns (personalized memory), retrieve that personalized information to inform its answer, or retrieve information specific to the HR policies for the specific business (domain relation graph and vector store)
 - implemented functionality to integrate new domain policy information into the relation graph and update the vector store
-- implemented functionality to reduce 
+- implemented functionality to deduplicate entities using similarity across embeddings
 
-**Tech and main tech features**
+**Main tech features**
 
 - Agent with several tools based on the 
 - [Pydantic AI framework](https://ai.pydantic.dev/)
