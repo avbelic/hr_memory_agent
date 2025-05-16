@@ -77,18 +77,37 @@ agent = Agent(
     'openai:gpt-4o-mini',
     deps_type=RAGDeps,
     system_prompt=
+    # """
+    # You are a helpful assistant that answers different employee questions.
+    # Use the retrieve RAG tool to get relevant information from the knowledge base if user input is related to employment policies, labor laws in Germany, HR. Inform the user that the information is from internal knowlege base.
+    # Use the retrieve memory tool if user input is related to questions about personal growth and interests, 
+    # If the user input is about personal growth or interests, use the store memory tool to store the new memory and inform the user about it.
+    # If data retrieved from the tools doesn't contain the answer, clearly state that the information isn't available in the stored data and provide your best general knowledge response."""
     """
-    You are a helpful assistant that answers different user questions.
-    Use the retrieve rag tool to get relevant information from the knowledge base if user input is related to employment policies, labor laws in Germany, HR. 
-    Use the retrieve memory tool if user input is related to users personal growth and interests, 
-    If the user input is about personal growth or interests, use the store memory tool to store the new memory and inform the user about it.
-    If data retrieved from the tools doesn't contain the answer, clearly state that the information isn't available in the stored data and provide your best general knowledge response."""
+**SYSTEM:** You are a helpful assistant designed to address various employee questions. Follow these guidelines to provide the best responses:
+
+1. **Employment Policies, Labor Laws, and HR Queries:**
+   - Use the RAG (Retrieval-Augmented Generation) tool to fetch relevant information from the internal knowledge base when the user inquiry pertains to:
+     - Employment policies
+     - Labor laws in Germany
+     - Human Resources (HR) matters
+   - Clearly inform the user that the information is sourced from the internal knowledge base.
+
+2. **Personal Growth and Interests:**
+   - Utilize the retrieve memory tool to gather information when the user's question relates to personal growth or interests.
+   - Use the store memory tool to save any new information provided by the user about their personal growth or interests. 
+   - Notify the user that their input has been stored.
+
+3. **General Knowledge Response:**
+   - If the retrieved data from the tools does not provide an answer, explicitly state that the information isn't available in the stored data.
+   - Offer the user the best possible response based on your general knowledge.
+    """
 )
 
 
 @agent.tool
 async def retrieve_rag(context: RunContext[RAGDeps], search_query: str) -> Union[str, AsyncIterator[str]]:
-    """Retrieve relevant documents about employment policies, labor laws in Germany, HR from lightRAG knowledge base based on a search query.
+    """Retrieve relevant information about employment policies, labor laws in Germany, HR matters from the RAG knowledge base based on a search query.
     
     Args:
         context: The run context containing dependencies.
@@ -102,7 +121,7 @@ async def retrieve_rag(context: RunContext[RAGDeps], search_query: str) -> Union
 
 @agent.tool
 async def store_memory(context: RunContext[RAGDeps], messages: Union[List[Dict[str, str]], str], user_id: Optional[str] = None) -> Dict[str, Any]:
-    """Store a new personal memory in Mem0.
+    """Store a new personal memory in Mem0 when related to personal growth or interests.
     
     Args:
         context: The run context containing dependencies.
@@ -118,7 +137,7 @@ async def store_memory(context: RunContext[RAGDeps], messages: Union[List[Dict[s
 
 @agent.tool
 async def retrieve_memory(context: RunContext[RAGDeps], query: str, user_id: Optional[str] = None) -> List[Dict[str, Any]]:
-    """Search and retrieve personal memories from Mem0.
+    """Search and retrieve personal memories from Mem0 when related to personal growth or interests.
     
     Args:
         context: The run context containing dependencies.
