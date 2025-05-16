@@ -1,9 +1,9 @@
 Simple AI agent capable to assist and adapt to each individual employee as well as answer and update relevant information related to selected HR domains specific to a business.
 
 **Main Functionality**
-- this PoC lets users interact with an HR agent server with the agent deciding to either learn new personalized HR relevant information for the user to support its development, HR related interests and concerns (personalized memory), retrieve that personalized information to inform its answer, or retrieve information specific to the HR policies for the specific business (domain relation graph and vector store)
-- implemented functionality to integrate new domain policy information into the relation graph and update the vector store
-- implemented functionality to deduplicate entities using similarity across embeddings
+- this PoC lets users interact with an HR agent server with the agent deciding to either learn new personalized HR relevant information for the user to support their career development, professional growth related interests and concerns (personalized memory), retrieve that personalized information to inform its answer, or retrieve information specific to the HR policies for the business environment the user operates in (domain relation graph and embeddings)
+- additional functionality to integrate new domain policy information into the relation graph and update the vector store
+- additional functionality to semantically deduplicate entities using vector similarities across embeddings
 
 **Main tech features**
 
@@ -21,4 +21,5 @@ Simple AI agent capable to assist and adapt to each individual employee as well 
 - basic test scripts and unit tests for core functionality
 
 **Data**
+
 [data used for lightRAG (employment policies in Germany)](https://buse.de/wp-content/uploads/2024/01/Employment-Law-in-Germany-digital-Version-2024.pdf)
